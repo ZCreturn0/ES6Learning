@@ -1,0 +1,18 @@
+let { foo: baz } = { foo: "aaa", bar: "bbb" };
+baz // "aaa"
+foo // error: foo is not defined
+foo是匹配的模式，baz才是变量。真正被赋值的是变量baz，而不是模式foo。
+左边不赋值,右边赋值
+
+默认值生效的条件是，对象的属性值严格等于undefined。
+var {x = 3} = {x: undefined};
+x // 3
+var {x = 3} = {x: null};
+x // null
+
+let { log, sin, cos } = Math;
+为Math(Function)添加属性
+
+[[1, 2], [3, 4]].map(([a, b]) => a + b);
+// [ 3, 7 ]
+
