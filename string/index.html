@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 遍历字符串
+        // {
+        //     let str = 'asdsdfdfhh';
+        //     for(let s of str){
+        //         console.log(s);
+        //     }
+        // }
+        // 字符串子串
+        // {
+        //     let str = 'addfjjkhjfd';
+        //     console.log(str.includes('fjh'));
+        //     console.log(str.includes('fjj'));
+        //     console.log(str.startsWith('add'));
+        //     console.log(str.endsWith('fd'));
+        //     console.log('666'.repeat(3));
+        // }
+        // 字符串补全(ES2017)
+        // {
+        //     console.log('aaa'.padStart(10,'xxx'));
+        //     console.log('aaa'.padEnd(10, 'xxx'));
+        // }
+        // 字符串模版
+        {
+            let info = [
+                {name:'aaa',age:12},
+                {name:'bbb',age:12}
+            ]
+            let tpl = param => `
+                <table>
+                    ${param.map(p => `
+                        <tr><td>${p.name}</td></tr>
+                        <tr><td>${p.age}</td></tr>
+                    `).join('')}
+                </table>
+            `
+            console.log(tpl(info));
+        }
+    </script>
+</body>
+</html>
