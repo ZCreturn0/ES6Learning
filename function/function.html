@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 缺省参数
+        // function hello(world='666'){
+        //     console.log(`Hello ${world}!`);
+        // }
+        // hello();
+        // hello('World');
+
+        // function m1({ x = 0, y = 0 } = {}) {
+        //     return [x, y];
+        // }
+        // console.log(m1());
+
+        // 必传参数,不传报错
+        function LackOfParam(){
+            throw 'Lack Of Param';
+        }
+        function func(param = LackOfParam()){
+            console.log(param);
+        }
+        func(123);
+        func('aaa');
+        // 报错
+        func();
+    </script>
+</body>
+</html>
