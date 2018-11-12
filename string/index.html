@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+    <input type="text" id="msg"/>
+    <input type="button" id="btn" value="确定"/>
     <script>
         // 遍历字符串
         // {
@@ -30,20 +32,40 @@
         //     console.log('aaa'.padEnd(10, 'xxx'));
         // }
         // 字符串模版
+        // {
+        //     let info = [
+        //         {name:'aaa',age:12},
+        //         {name:'bbb',age:12}
+        //     ]
+        //     let tpl = param => `
+        //         <table>
+        //             ${param.map(p => `
+        //                 <tr><td>${p.name}</td></tr>
+        //                 <tr><td>${p.age}</td></tr>
+        //             `).join('')}
+        //         </table>
+        //     `
+        //     console.log(tpl(info));
+        // }
+        // 标签模板
         {
-            let info = [
-                {name:'aaa',age:12},
-                {name:'bbb',age:12}
-            ]
-            let tpl = param => `
-                <table>
-                    ${param.map(p => `
-                        <tr><td>${p.name}</td></tr>
-                        <tr><td>${p.age}</td></tr>
-                    `).join('')}
-                </table>
-            `
-            console.log(tpl(info));
+            // alert`123`;
+            
+            let msg;
+            document.getElementById('btn').onclick = () => {
+                msg = document.getElementById('msg').value;
+                SaferHTML`<p>${msg} has sent you a message.</p>`;
+            }
+            // arguments[0]:Array:split by ${};value0,value1,value2......(${value0}...)
+            // arguments[0] == templateData
+            function SaferHTML(templateData){
+                let sentMsg = arguments[1];
+                sentMsg = sentMsg.replace(/&/g,'&amp;')
+                                 .replace(/</g,'&lt;')
+                                 .replace(/>/g,'&gt;');
+                let result = templateData[0] + sentMsg + templateData[1];
+                console.log(result);
+            }
         }
     </script>
 </body>
