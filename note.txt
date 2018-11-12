@@ -16,3 +16,13 @@ let { log, sin, cos } = Math;
 [[1, 2], [3, 4]].map(([a, b]) => a + b);
 // [ 3, 7 ]
 
+函数length属性的含义是，该函数预期传入的参数个数
+
+扩展运算符如果放在括号中，JavaScript 引擎就会认为这是函数调用，否则就会报错。
+
+Math.max.apply(null, [14, 3, 77])
+Array.prototype.push.apply(arr1, arr2);
+
+keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历。
+
+Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。

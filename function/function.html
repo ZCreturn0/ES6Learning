@@ -21,16 +21,23 @@
         // console.log(m1());
 
         // 必传参数,不传报错
-        function LackOfParam(){
-            throw 'Lack Of Param';
+        // function LackOfParam(){
+        //     throw 'Lack Of Param';
+        // }
+        // function func(param = LackOfParam()){
+        //     console.log(param);
+        // }
+        // func(123);
+        // func('aaa');
+        // // 报错
+        // func();
+
+        // 不定个数参数
+        function func(...params){
+            console.log(params);
         }
-        function func(param = LackOfParam()){
-            console.log(param);
-        }
-        func(123);
-        func('aaa');
-        // 报错
         func();
+        func(1,2,3,4);
     </script>
 </body>
 </html>
