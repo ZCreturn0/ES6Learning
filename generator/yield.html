@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* fib(){
+            let [cur,next] = [0,1];
+            while(true){
+                yield next;
+                [cur,next] = [next,cur+next];
+            }
+        }    
+        for(let n of fib()){
+            if(n>100){
+                break;
+            }
+            console.log(n);
+        }
+        // function* func(){
+        //     console.log('before aaa');
+        //     yield 'aaa';
+        //     console.log('before bbb');
+        //     yield 'bbb';
+        // }
+        // let it = func();
+        // console.log(it.next());
+        // it.next();
+        // it.next();
+        function* main(){
+            let result = yield getRequest();
+            console.log(result);
+        }
+        function getRequest(){
+            setTimeout(() => {
+                it.next({name:'aaaa',age:12});
+            },2000);
+        }
+        var it = main();
+        console.log(it.next());
+    </script>
+</body>
+</html>
