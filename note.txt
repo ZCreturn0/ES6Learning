@@ -26,3 +26,5 @@ Array.prototype.push.apply(arr1, arr2);
 keys()是对键名的遍历、values()是对键值的遍历，entries()是对键值对的遍历。
 
 Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。
+
+var proxy = new Proxy(target, handler);
