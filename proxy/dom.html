@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let dom = new Proxy({},{
+            get:function(target,property){
+                return function(attrs = {},...children){
+                    let el = document.createElement(property);
+                    for(let attr of Object.keys(attrs)){
+                        el.setAttribute(attr,attrs[attr]);
+                    }
+                    for(let child of children){
+                        if(typeof child == 'string'){
+                            child = document.createTextNode(child);
+                        }
+                        el.append(child);
+                    }
+                    return el;
+                }
+            }
+        });    
+        let el = 
+        dom.div({},'Hello,my name is ',
+            dom.a({'href':'https://www.baidu.com/'},'666'),
+            dom.br({}),
+            'My habits:',
+            dom.ul({},
+                dom.li({},'swimming'),
+                dom.li({},'skating'),
+                dom.li({},'gaming')
+            )
+        );
+        document.body.append(el);
+    </script>
+</body>
+</html>
