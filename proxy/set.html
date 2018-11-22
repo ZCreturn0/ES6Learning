@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let validator = {
+            set(obj,attr,val,proxy){
+                if(attr == 'age'){
+                    if(!Number.isInteger(val)){
+                        throw 'age must be an integer';
+                    }
+                    else if(val > 200){
+                        throw 'Are you kidding me?';
+                    }
+                }
+                obj[attr] = val;
+            }
+        }    
+        let p = new Proxy({},validator);
+        p.a = '1';
+        p.age = 10;
+        console.log(p.age);
+        // p.age = '10';
+        // console.log(p.age);
+        p.age = 300;
+    </script>
+</body>
+</html>
