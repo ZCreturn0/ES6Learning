@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function loadImage(url){
+            return new Promise((resolve,reject) => {
+                let img = new Image();
+                img.onload = () => {
+                    resolve(img);
+                }
+                img.onerror = () => {
+                    reject();
+                }
+                img.src = url;
+            });
+        }
+        loadImage('./images/demo.jpg')
+        .then((img) => {
+            console.log('image loaded successful');
+            document.body.append(img);
+        })
+        .catch(() => {
+            console.log('image loaded failed');
+        });
+    </script>
+</body>
+</html>
