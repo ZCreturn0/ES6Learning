@@ -24,6 +24,16 @@
         let cat = new Cat();
         animal.speak();
         cat.speak();
+        console.log(cat instanceof Animal);
+        console.log(cat instanceof Cat);
+        function Dog(name='Dog'){
+            Animal.call(this,'Dog');
+            this.name = name;
+        }
+        let dog = new Dog();
+        dog.speak();
+        console.log(dog instanceof Animal);
+        console.log(dog instanceof Dog);
     </script>
 </body>
 
