@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Animal(name='Animal'){
+            this.name = name;
+            this.speak = function(){
+                console.log(`${this.name} sleeping`);
+            }
+        }
+        function Cat(name='Cat'){
+            this.name = name;
+        }
+        Cat.prototype = new Animal();
+        let animal = new Animal();
+        let cat = new Cat();
+        animal.speak();
+        cat.speak();
+    </script>
+</body>
+
+</html>
