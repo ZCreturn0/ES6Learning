@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let obj = {name:'aaaa'};
+        // 获取 obj 的 name 属性描述
+        // for...in 获取自身及继承的enumerable属性
+        // Object.keys(obj)  JSON.stringify(obj)  Object.assign()  只获取自身的enumerable属性
+        // Object.getOwnPropertyNames(obj)  自身属性,不包含 Symbol 获取自身及继承的enumerable属性
+        // Object.getOwnPropertySymbols(obj)  所有 Symbol
+        // Reflect.ownKeys(obj)  自身所有属性(不受只获取自身的enumerable属性限制)
+        console.log(Object.getOwnPropertyDescriptor(obj,'name'));    
+    </script>
+</body>
+</html>
