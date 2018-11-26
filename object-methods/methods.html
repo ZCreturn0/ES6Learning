@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Object.getOwnPropertyDescriptor()方法会返回某个对象属性的描述对象
+        // Object.getOwnPropertyDescriptors()方法返回指定对象所有自身属性（非继承属性）的描述对象    
+        let obj = {
+            name:'aaa',
+            get age(){
+                return 12;
+            }
+        }
+        console.log(Object.getOwnPropertyDescriptor(obj,'name'));
+        // 不能获取get属性
+        console.log(Object.getOwnPropertyDescriptor(obj, 'age'));
+        console.log(Object.getOwnPropertyDescriptors(obj));
+    </script>
+</body>
+</html>
