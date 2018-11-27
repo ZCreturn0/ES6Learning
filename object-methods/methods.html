@@ -20,6 +20,17 @@
         // 不能获取get属性
         console.log(Object.getOwnPropertyDescriptor(obj, 'age'));
         console.log(Object.getOwnPropertyDescriptors(obj));
+
+        let o = {a:111,b:222,c:333};
+        for(let key of Object.keys(o)){
+            console.log(key);
+        }
+        for(let value of Object.values(o)){
+            console.log(value);
+        }
+        for(let [key,value] of Object.entries(o)){
+            console.log(`${key}:${value}`);
+        }
     </script>
 </body>
 </html>
