@@ -31,6 +31,9 @@
         for(let [key,value] of Object.entries(o)){
             console.log(`${key}:${value}`);
         }
+
+        let g = Object.fromEntries(new Map().set('aa',11).set('bb',22));
+        console.log(g);
     </script>
 </body>
 </html>
