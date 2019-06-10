@@ -23,14 +23,20 @@
             name: 'aaa',
             age: 12
         }
-        var iterator = obj[Symbol.iterator]();
-        while(item = iterator.next()){
-            if(!item.done){
-                console.log(item)
-            }
-            else{
-                break;
-            }
+        // var iterator = obj[Symbol.iterator]();
+        // while(item = iterator.next()){
+        //     if(!item.done){
+        //         console.log(item)
+        //     }
+        //     else{
+        //         break;
+        //     }
+        // }
+        for(var item of obj){
+            console.log(item)
+        }
+        for(var key in obj){
+            console.log(key)
         }
     </script>
 </body>
