@@ -8,6 +8,29 @@
 </head>
 <body>
     <script>
+        function* gen(){
+            console.log('start');
+            var x1 = yield 1;
+            console.log('x1='+x1);
+            var x2 = yield 2;
+            console.log('x2=' + x2);
+            var x3 = yield 3;
+            console.log('x3=' + x3);
+            var x4 = yield 4;
+            console.log('x4=' + x4);
+            console.log('end');
+            return x1+x2+x3+x4;
+        }
+        var g = gen();
+        console.log(g.next());              // start   yield 1
+        console.log(g.next());              // x1:undefined  yield 2
+        console.log(g.next(10));            // x2:10 yield 3
+        console.log(g.next());
+        console.log(g.next());
+        console.log(g.next());
+
+
+
         function* fib(){
             let [cur,next] = [0,1];
             while(true){
