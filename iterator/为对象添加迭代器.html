@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        Object.prototype[Symbol.iterator] = function(){
+            var keys = Object.keys(this);
+            var len = keys.length;
+            var _this = this;
+            var index = 0;
+            return {
+                next: function(){
+                    return index < len ? { value: _this[keys[index++]], done: false } : { value: undefined, done: true};
+                }
+            }
+        }
+        var obj = {
+            name: 'aaa',
+            age: 12
+        }
+        var iterator = obj[Symbol.iterator]();
+        while(item = iterator.next()){
+            if(!item.done){
+                console.log(item)
+            }
+            else{
+                break;
+            }
+        }
+    </script>
+</body>
+</html>
