@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Link(value){
+            this.value = value;
+            this.next = null;
+        }
+        Link.prototype[Symbol.iterator] = function(){
+            var _this = this;
+            // 迭代器对象必须包含next属性,next每次调用都能返回一个对象
+            return {
+                next: function(){
+                    if(_this){
+                        value = _this.value;
+                        _this = _this.next;
+                        return { value: value, done: false};
+                    }
+                    else{
+                        return { value: undefined, done: true };
+                    }
+                }
+            }
+        }
+        var one = new Link(1);
+        var two = new Link(2);
+        var three = new Link(3);
+        one.next = two;
+        two.next = three;
+        for(var val of one){
+            console.log(val);
+        }
+    </script>
+</body>
+</html>
