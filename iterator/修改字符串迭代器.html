@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 必须得是对象
+        var str = new String('aabbcc');
+        str[Symbol.iterator] = function(){
+            return {
+                first: true,
+                next: function(){
+                    if(this.first){
+                        this.first = false;
+                        return { value: '????', done: false };
+                    }
+                    else{
+                        return { value: undefined, done: true };
+                    }
+                }
+            }
+        }
+        console.log(str.toString());
+        console.log(...str);
+    </script>
+</body>
+</html>
