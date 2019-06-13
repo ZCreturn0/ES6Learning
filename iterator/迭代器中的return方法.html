@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        Object.prototype[Symbol.iterator] = function () {
+            var keys = Object.keys(this);
+            var len = keys.length;
+            var _this = this;
+            var index = 0;
+            return {
+                next: function () {
+                    return index < len ? { value: _this[keys[index++]], done: false } : { value: undefined, done: true };
+                },
+                return: function(){
+                    console.log('loop break');
+                    return { done: true };
+                }
+            }
+        }
+        var obj = {
+            a: 'aaa',
+            b: 'bbb',
+            c: 'ccc',
+            d: 'ddd'
+        }
+        // for(var key in obj){
+        //     console.log(key + ':' + obj[key]);
+        //     if(key == 'c'){
+        //         break;
+        //     }
+        // }
+        // for...of才会触发return()
+        for(var item of obj){
+            console.log(item);
+            if(item == 'ccc'){
+                break;
+            }
+        }
+    </script>
+</body>
+</html>
