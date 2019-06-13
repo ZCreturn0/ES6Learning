@@ -9,11 +9,11 @@
 <body>
     <script>
         var arr1 = ['a','b'];
-        var arr2 = ['a',2,5,8,'b','c'];
+        var arr2 = [0,1,2];
         var obj = {
-            '0': 'aa',
-            '1': 'bb',
-            '2': 'cc',
+            '0': 'x',
+            '1': 'y',
+            '2': 'z',
             'length': 3
         };
         obj[Symbol.iterator] = arr1[Symbol.iterator].bind(arr2);
