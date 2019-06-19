@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            name: 'aaa'
+        }    
+        Object.defineProperty(obj, 'name', {});             // 不存在'name'属性会报错
+        if (Reflect.defineProperty(obj, 'name', {})){       // 不存在'name'属性返回false
+            console.log('存在name属性')
+        }
+    </script>
+</body>
+</html>
