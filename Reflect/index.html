@@ -15,6 +15,7 @@
         if (Reflect.defineProperty(obj, 'name', {})){       // 不存在'name'属性返回false
             console.log('存在name属性')
         }
+        console.log(Reflect.has(obj, 'name'));              // 代替 'name' in obj
     </script>
 </body>
 </html>
