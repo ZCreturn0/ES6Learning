@@ -1,4 +1,4 @@
-let { foo: baz } = { foo: "aaa", bar: "bbb" };
+﻿let { foo: baz } = { foo: "aaa", bar: "bbb" };
 baz // "aaa"
 foo // error: foo is not defined
 foo是匹配的模式，baz才是变量。真正被赋值的是变量baz，而不是模式foo。
@@ -28,3 +28,5 @@ keys()是对键名的遍历、values()是对键值的遍历，entries()是对键
 Object.assign方法用于对象的合并，将源对象（source）的所有可枚举属性，复制到目标对象（target）。
 
 var proxy = new Proxy(target, handler);
+
+class: 方法之间不需要逗号分隔，加了会报错
