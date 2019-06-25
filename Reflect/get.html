@@ -13,6 +13,9 @@
              b: 3,
              get sum(){
                  return this.a + this.b;
+             },
+             set bar(val){
+                this.a = val;
              }
          }
          var obj2 = {
@@ -22,6 +25,11 @@
          console.log(Reflect.get(obj, 'sum'));
          // obj2 借用 obj1 get 方法
          console.log(Reflect.get(obj, 'sum', obj2));
+         Reflect.set(obj, 'bar', 5);
+         console.log(obj.a);            // 5
+         Reflect.set(obj, 'bar', 15, obj2);
+         console.log(obj.a);            // 5
+         console.log(obj2.a);           // 15
     </script>
 </body>
 </html>
