@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            // resolve, reject 执行总是晚于本轮的同步事件
+            resolve(1);
+            // 先执行
+            console.log(2);
+        });
+        p1
+        .then(result => {
+            console.log(result);
+        })
+        .catch(result => {
+            console.log(result);
+        });
+        // 2  1
+
+        let p2 = new Promise((resolve, reject) => {
+            return resolve('a');
+            // 不执行
+            console.log('b');
+        });
+        p2
+        .then(result => {
+            console.log(result);
+        })
+        .catch(result => {
+            console.log(result);
+        });
+        // a
+    </script>
+</body>
+</html>
