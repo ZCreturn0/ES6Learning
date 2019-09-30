@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 模拟获取数据
+        function fetchData(){
+            return new Promise(function(resolve, reject){
+                setTimeout(() => {
+                    let status = Math.random();
+                    status > 0.5 ? resolve(status) : reject(status);
+                }, 1000);
+            });
+        }
+        // 两种方法等价
+        // 1. promise.then(fun).catch(func);
+        // 2. promise.then(fun, func);
+        fetchData()
+        .then((result) => {
+            console.log(result);
+            console.log('获取成功');
+        })
+        .catch((result) => {
+            console.log(result);
+            console.log('获取失败');
+        });
+        // fetchData()
+        // .then((result) => {
+        //     console.log(result);
+        //     console.log('获取成功');
+        // },(result) => {
+        //     console.log(result);
+        //     console.log('获取失败');
+        // });
+    </script>
+</body>
+</html>
