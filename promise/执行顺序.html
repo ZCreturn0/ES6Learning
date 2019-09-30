@@ -14,8 +14,7 @@
             // 先执行
             console.log(2);
         });
-        p1
-        .then(result => {
+        p1.then(result => {
             console.log(result);
         })
         .catch(result => {
@@ -28,14 +27,30 @@
             // 不执行
             console.log('b');
         });
-        p2
-        .then(result => {
+        p2.then(result => {
             console.log(result);
         })
         .catch(result => {
             console.log(result);
         });
         // a
+
+        let p3 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('aaaaaaaaaaaa');
+            }, 1000);
+        });
+        p3.then(result => {
+            console.log('p3:' + result);
+        });
+        let p4 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                return resolve(p3);
+            }, 1000);
+        });
+        p4.then(result => {
+            console.log('p4:' + result);
+        })
     </script>
 </body>
 </html>
