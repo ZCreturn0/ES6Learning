@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('p1 reject');
+                reject(new Error('fail'));
+            }, 3 * 1000);
+        });
+        let p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('p2 resolve');
+                resolve(p1);
+            }, 1000);
+        });
+        p2
+        .then(result => {
+            // p1 状态决定了 p2, p1 状态会传递给 p2, p2 状态失效,这里的 then 和 catch 都是针对 p1 的
+            console.log(result);
+        })
+        .catch(result => {
+            console.log(result);
+        })
+    </script>
+</body>
+</html>
