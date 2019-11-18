@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            reject(new Error('error1'));
+        })
+        .catch(err => {
+            // 成功捕捉到
+            console.log(err);
+        });
+
+        let p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject(new Error('error2'));
+            }, 1000);
+        })
+        .catch(err => {
+            // 成功捕捉到
+            console.log(err);
+        });
+
+        let p3 = new Promise((resolve, reject) => {
+            throw new Error('error3');
+        })
+        .catch(err => {
+            // 成功捕捉到
+            console.log(err);
+        });
+
+        let p4 = new Promise((resolve, reject) => {
+            // 异步,进入 setTimeout 时, Promise 已执行完了,抛出异常,无法用 catch 捕捉
+            setTimeout(() => {
+                throw new Error('error4');
+            }, 0);
+        })
+        .catch(err => {
+            // 未捕捉到
+            console.log(err);
+        });
+    </script>
+</body>
+</html>
