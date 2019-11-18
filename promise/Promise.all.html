@@ -87,6 +87,29 @@
             // 只输出第一个错误(reject('first reject')),后面的不再执行
             console.error(err);
         });
+
+        // 捕获自身的错误
+        let p9 = new Promise((resolve, reject) => {
+            resolve('p9 ok');
+        });
+        let ep10 = new Promise((resolve, reject) => {
+            reject('ep10 failed');
+        })
+        .catch(err => {
+            // 捕获自身的 reject,处理完后自身状态也会变成 resolved
+            console.log('error caught:' + err);
+        });
+        let p11 = new Promise((resolve, reject) => {
+            resolve('p11 ok');
+        });
+        // 由于 ep10处理了自身 reject,状态变成 resolved,所以所有 Promise 状态都变为 resolved,最终进入 then,但 ep10 没有数据返回
+        let catchSelf = Promise.all([p9, ep10, p11]).then(res => {
+            // 输出 p9 ok p11 ok
+            console.log(res.join(' '));
+        })
+        .catch(err => {
+            console.log('error:' + err);
+        });
     </script>
 </body>
 </html>
