@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let getData = new Promise((resolve, reject) => {
+            let time = Math.random();
+            console.log('历时: ' + time + 's');
+            setTimeout(() => {
+                resolve('数据获取成功');
+            }, time * 1000);
+        });
+        let timeout = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject('超时');
+            }, 500);
+        });
+        // 先改变状态的 Promise 决定 race 的状态
+        Promise.race([getData, timeout]).then((data) => {
+            console.log(data);
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    </script>
+</body>
+</html>
