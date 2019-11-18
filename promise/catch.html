@@ -44,6 +44,20 @@
             // 未捕捉到
             console.log(err);
         });
+
+
+        // catch 返回的还是个 Promise,所以 catch 和 then 都会执行
+        let p5 = new Promise((resolve, reject) => {
+            throw new Error('error5');
+        })
+        .catch(err => {
+            // 输出错误
+            console.log(err);
+        })
+        .then(res => {
+            // undefined
+            console.log(res);
+        });
     </script>
 </body>
 </html>
