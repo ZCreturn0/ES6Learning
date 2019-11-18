@@ -52,6 +52,41 @@
             // 按时间依次输出报错
             console.log(err);
         });
+
+        // 部分报错情况
+        let p4 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('resolve');
+            }, 2000);
+        });
+        let ep5 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject(new Error('async error'));
+            }, 1000);
+        });
+        let ep6 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject('reject');
+            }, 3000);
+        });
+        let p7 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('first resolve');
+            }, 0);
+        });
+        let ep8 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject('first reject');
+            }, 0);
+        });
+        // 有报错不执行then
+        let mix = Promise.all([p4, ep5, ep6, p7, ep8]).then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            // 只输出第一个错误(reject('first reject')),后面的不再执行
+            console.error(err);
+        });
     </script>
 </body>
 </html>
