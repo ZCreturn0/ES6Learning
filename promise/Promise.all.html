@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('hello');
+            }, 2000);
+        });
+        let p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('world');
+            }, 100);
+        });
+        let p3 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('aaaaa');
+            }, 5000);
+        });
+        let p = Promise.all([p1, p2, p3]).then((res) => {
+            // 按 p1,p2,p3 的顺序返回
+            console.log(res.join(' '));             // hello world aaaaa
+        })
+    </script>
+</body>
+</html>
