@@ -8,6 +8,7 @@
 </head>
 <body>
     <script>
+        // 正常情况
         let p1 = new Promise((resolve, reject) => {
             setTimeout(() => {
                 resolve('hello');
@@ -26,7 +27,31 @@
         let p = Promise.all([p1, p2, p3]).then((res) => {
             // 按 p1,p2,p3 的顺序返回
             console.log(res.join(' '));             // hello world aaaaa
+        });
+
+        // 异常情况
+        let ep1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                throw new Error('error1');
+            }, 2000);
+        });
+        let ep2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                throw new Error('error2');
+            }, 5000);
+        });
+        let ep3 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                throw new Error('error3');
+            }, 1000);
+        });
+        let ep = Promise.all([ep1, ep2, ep3]).then(res => {
+            console.log(res.join(' '));
         })
+        .catch(err => {
+            // 按时间依次输出报错
+            console.log(err);
+        });
     </script>
 </body>
 </html>
