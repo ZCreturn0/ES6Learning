@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Promise.any (暂不支持)
+        // 其中一个变为 fulfilled 则返回 fulfilled 状态;如果所有都变为 rejected ,则返回 rejected 状态
+        let p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('done')
+            }, 2000);
+        });
+        let ep2 = new Promise((resolve, reject) =>{
+            setTimeout(() => {
+                reject('failed');
+            }, 1000);
+        });
+        let ep3 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject('failed 2');
+            }, 3000);
+        });
+        let p = Promise.any([p1, ep2, ep3]).then(res => {
+            console.log(res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    </script>
+</body>
+</html>
