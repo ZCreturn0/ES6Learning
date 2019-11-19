@@ -12,7 +12,7 @@
         // 其中一个变为 fulfilled 则返回 fulfilled 状态;如果所有都变为 rejected ,则返回 rejected 状态
         let p1 = new Promise((resolve, reject) => {
             setTimeout(() => {
-                resolve('done')
+                resolve('done');
             }, 2000);
         });
         let ep2 = new Promise((resolve, reject) =>{
@@ -30,7 +30,7 @@
         })
         .catch(err => {
             console.log(err);
-        })
+        });
     </script>
 </body>
 </html>
