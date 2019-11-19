@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('success done');
+                resolve('success');
+            }, 1000);
+        });
+        let ep1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('failed done');
+                reject('failed');
+            }, 1500);
+        });
+        // 当所有 Promise 完成(不管状态如何)后触发 allSettled
+        Promise.allSettled([p1, ep1]).then(res => {
+            console.log(res);
+        });
+    </script>
+</body>
+</html>
