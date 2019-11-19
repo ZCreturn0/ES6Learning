@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 参数为 Promise 对象
+        // 直接返回原 Promise 对象
+        let p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                reject('aaaa')
+            }, 1000);
+        });
+        // 返回 p1
+        let r1 = Promise.resolve(p1);
+        console.log(r1);
+        r1.then(res => {
+            console.log('success: ' + res);
+        })
+        .catch(err => {
+            // fail: aaaa
+            console.log('fail: ' + err);
+        });
+
+        // 2. 参数为 thenable 对象(具有 then 方法的对象)
+        // 将这个对象转为 Promise 对象,然后立即执行 then 方法
+        let obj = {
+            then: (resolve, reject) => {
+                // 立即执行此方法
+                // then executed
+                console.log('then executed');
+                reject('thenable');
+            }
+        };
+        // obj 包装成了一个 Promise
+        let r2 = Promise.resolve(obj);
+        r2.then(res => {
+            console.log('success: ' + res);
+        })
+        .catch(err => {
+            // 对应 thenable 里 then 方法里的 reject
+            // fail: thenable
+            console.log('fail: ' + err);
+        });
+
+        // 3. 参数为非 thenable 对象或原始类型
+        // 返回一个状态为 resolved 的 Promise,并将参数传给 then
+        let param = {
+            name: 'aaaa',
+            age: 12
+        };
+        // 返回一个状态为 resolved 的 Promise,参数为 param
+        let r3 = Promise.resolve(param);
+        r3.then(res => {
+            // {name: 'aaaa',age: 12}
+            console.log(res);
+        });
+
+        // 4. 不带参数
+        // 返回一个状态为 resolved 的 Promise
+        let r4 = Promise.resolve();
+        r4.then(() => {
+            console.log('ssssssss');
+        });
+    </script>
+</body>
+</html>
