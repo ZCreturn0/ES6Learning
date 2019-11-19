@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 与 resolve 不同, reject 的参数会直接返回给 catch
+        let obj = {
+            then: (resolve, reject) => {
+                reject('aaaaa');
+            }
+        };
+        let p = Promise.reject(obj);
+        p.catch(err => {
+            console.log(err === obj);
+        });
+    </script>
+</body>
+</html>
