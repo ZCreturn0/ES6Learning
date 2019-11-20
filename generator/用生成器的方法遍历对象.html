@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let person = {
+            name: 'aaa',
+            age: 12,
+            addr: 'cccc'
+        };
+        function* getIterator(obj) {
+            let keys = Reflect.ownKeys(obj);
+            for(let item of keys) {
+                yield [item, obj[item]];
+            }
+        }
+        let g = getIterator(person);
+        for(let [key, value] of g) {
+            console.log(`${key}: ${value}`);
+        }
+    </script>
+</body>
+</html>
