@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* gen() {
+            yield 1;
+            yield 2;
+            yield 3;
+            yield 4;
+            yield 5;
+            // return 不属于迭代器上的元素
+            return 6;
+        }
+        // 返回一个迭代器
+        let g = gen();
+        // 展开符作用于迭代器上
+        // 1,2,3,4,5
+        console.log(...g);
+    </script>
+</body>
+</html>
