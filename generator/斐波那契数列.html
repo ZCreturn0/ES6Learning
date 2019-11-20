@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* gen() {
+            let [pre, cur] = [0, 1];
+            while(true) {
+                yield cur;
+                [pre, cur] = [cur, pre + cur];
+            }
+        }
+        // 返回的是一个迭代器
+        let g = gen();
+        for(let n of g) {
+            if(n > 100) {
+                break;
+            }
+            console.log(n);
+        }
+    </script>
+</body>
+</html>
