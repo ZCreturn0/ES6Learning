@@ -13,6 +13,11 @@
             age: 12,
             addr: 'cccc'
         };
+        let person2 = {
+            name: 'fff',
+            age: 20,
+            addr: 'hhhh'
+        };
         function* getIterator(obj) {
             let keys = Reflect.ownKeys(obj);
             for(let item of keys) {
@@ -20,7 +25,20 @@
             }
         }
         let g = getIterator(person);
+        // 1. 直接遍历迭代器
         for(let [key, value] of g) {
+            console.log(`${key}: ${value}`);
+        }
+        console.log('------------------');
+        // 2. 为对象部署迭代器
+        function* getIterator2() {
+            let keys = Object.keys(this);
+            for(let item of keys) {
+                yield [item, this[item]];
+            }
+        }
+        person2[Symbol.iterator] = getIterator2;
+        for(let [key, value] of person2) {
             console.log(`${key}: ${value}`);
         }
     </script>
