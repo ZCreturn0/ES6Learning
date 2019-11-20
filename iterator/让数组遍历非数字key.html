@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let arr = [1, 2, 3, 4, 5, 6];
+        arr.name = 'aaa';
+        arr[Symbol.iterator] = function() {
+            let _this = this;
+            let keys = Object.keys(this);
+            let index = 0;
+            return {
+                next() {
+                    if(keys[index] || keys[index] === 0) {
+                        return {value: _this[keys[index++]], done: false};
+                    }
+                    else {
+                        return {value: undefined, done: true};
+                    }
+                }
+            }
+        }
+        for(let key in arr) {
+            console.log(key);
+        }
+        console.log('----------------------------------');
+        for(let item of arr) {
+            console.log(item);
+        }
+    </script>
+</body>
+</html>
