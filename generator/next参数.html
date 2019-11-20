@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* gen() {
+            let n = 0;
+            while(true) {
+                // yield 表达式默认返回 undefined, next() 方法可以改变 yield 返回值
+                let status = yield n++;
+                if(status) {
+                    break;
+                }
+            }
+        }
+        let g = gen();
+        // 0 false
+        console.log(g.next());
+        // 1 false
+        console.log(g.next());
+        // 2 false
+        console.log(g.next());
+        // undefined true
+        // 1作为     上一个      yield 表达式的返回值
+        console.log(g.next(1));
+        // undefined true
+        console.log(g.next());
+        // undefined true
+        console.log(g.next());
+    </script>
+</body>
+</html>
