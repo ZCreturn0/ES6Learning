@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* gen() {
+            try {
+                yield;
+            }
+            catch(e) {
+                console.log('inner: ' + e);
+            }
+        }
+        let g = gen();
+        g.next();
+        // 直接 throw 不能 catch
+        // g.throw('aaa');
+        try {
+            g.throw('aaaa');
+            g.throw('bbbb');
+        }
+        catch(e) {
+            console.log('outer: ' + e);
+        }
+        /**
+         *
+         * 情况一 注释 line20    输出结果: outer: aaaa
+         * 抛出错误 'aaaa',由于没有执行 next 函数,所以 gen 的构造没执行,所以没有内部 catch,会被外部 catch, throw 完后 catch,就不会执行 g.throw('bbbb');
+         *
+         *
+         * 情况二: 保留 line20    输出结果: inner: aaaa    outer: bbbb
+         * 执行了 next 函数,激活了内部 catch,内部 catch 捕获了 'aaaa' 错误,外部 catch 捕获了 'bbbb' 错误
+         * 
+         */
+    </script>
+</body>
+</html>
