@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* gen() {
+            yield 1;
+            yield 2;
+            yield 3;
+            yield 4;
+            yield 5;
+        }
+        let g = gen();
+        console.log(g.next());
+        console.log(g.next());
+        // {value: 'aaaa', done: true}
+        // return 不传参数则 value 为 undefined, done 总是 true
+        console.log(g.return('aaaa'));
+        // 提前结束,后面的 yield 不会执行,所以输出 {value: undefined,done: true}
+        console.log(g.next());
+
+        console.log('------------------');
+
+        function* gen2() {
+            yield 1;
+            try {
+                yield 2;
+                yield 3;
+            }
+            catch(e) {
+                console.log(e);
+            }
+            finally {
+                yield 4;
+                yield 5;
+            }
+        }
+        // 进入 try 模块后 return 且有 finally 模块,会把 finally 模块执行完后结束
+        let g2 = gen2();
+        console.log(g2.next());
+        // 2 进入 try 模块
+        console.log(g2.next());
+        // {value: 'cccc',done: true} 提前结束,try 后面的代码不再执行      这行会在 4 5 之后输出
+        console.log(g2.return('ccccc'));
+        // 4 执行 finally 模块
+        console.log(g2.next());
+        console.log(g2.next());
+        console.log(g2.next());
+    </script>
+</body>
+</html>
