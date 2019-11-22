@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* son() {
+            yield 1;
+            yield 2;
+            yield 3;
+        }
+        function* parent() {
+            yield 'a';
+            for(let item of son()) {
+                yield item;
+            }
+            yield 'b';
+        }
+        // parent 里嵌套了一个 son
+        console.log(...parent());
+
+        console.log('--------------------');
+
+        // 使用 yield* 语法糖简化代码
+        function* parent2() {
+            yield 'a';
+            yield* son();
+            yield 'b';
+        }
+        console.log(...parent2());
+    </script>
+</body>
+</html>
