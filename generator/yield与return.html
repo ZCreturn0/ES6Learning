@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* son() {
+            // 1 2 作为遍历器内容
+            yield 1;
+            yield 2;
+            // aaa 作为返回结果
+            return 'aaa';
+        }
+        function* parent() {
+            let result = yield* son();
+            // aaa
+            console.log(result);
+        }
+        // 1 2
+        console.log(...parent());
+    </script>
+</body>
+</html>
