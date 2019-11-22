@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 使用 yield 实现 flat 函数
+        let arr = [1,2,[3,4],5,6,[[7,8],[9,0]],['a',['b',['c']]]];
+        function flat(array) {
+            function* iterate(array) {
+                for(let item of array) {
+                    if(Array.isArray(item)) {
+                        yield* iterate(item);
+                    }
+                    else {
+                        yield item;
+                    }
+                }
+            }
+            return [...iterate(array)];
+        }
+        console.log(flat(arr));
+
+        // 2. 遍历二叉树
+        /**
+         *              a
+         *            /   \
+         *          c      d
+         *         / \       \
+         *       b    e        g
+         *      /
+         *     f
+         */
+        // 二叉树
+        function Tree(leftNode, label, rightNode) {
+            this.leftNode = leftNode;
+            this.label = label;
+            this.rightNode = rightNode;
+        }
+
+        let treeStructure = [
+            [
+                [
+                    [
+                        null,
+                        'f',
+                        null
+                    ],
+                    'b',
+                    null
+                ],
+                'c',
+                [
+                    null,
+                    'e',
+                    null
+                ]
+            ],
+            'a',
+            [
+                null,
+                'd',
+                [
+                    null,
+                    'g',
+                    null
+                ]
+            ]
+        ];
+
+        function makeTree(treeStructure) {
+            if(treeStructure) {
+                return new Tree(makeTree(treeStructure[0]), treeStructure[1], makeTree(treeStructure[2]));
+            }
+            else {
+                return null;
+            }
+        }
+
+        // 遍历树
+        // 先序
+        function* preOrder(tree) {
+            if(tree) {
+                // 改变顺序调整为先序,中序,后序
+                yield tree.label;
+                yield* preOrder(tree.leftNode);
+                yield* preOrder(tree.rightNode);
+            }
+        }
+
+        // 中序
+        function* middleOrder(tree) {
+            if(tree) {
+                yield* middleOrder(tree.leftNode);
+                yield tree.label;
+                yield* middleOrder(tree.rightNode);
+            }
+        }
+
+        // 后序
+        function* laterOrder(tree) {
+            if(tree) {
+                yield* laterOrder(tree.leftNode);
+                yield* laterOrder(tree.rightNode);
+                yield tree.label;
+            }
+        }
+
+        console.log('先序:');
+        console.log(...preOrder(makeTree(treeStructure)));
+        console.log('中序:');
+        console.log(...middleOrder(makeTree(treeStructure)));
+        console.log('后序:');
+        console.log(...laterOrder(makeTree(treeStructure)));
+    </script>
+</body>
+</html>
