@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function* son() {
+            yield 1;
+            yield 2;
+            yield 3;
+        }
+        function* parent() {
+            yield 'a';
+            // 使用 yield 返回一个遍历器
+            yield son();
+            yield 'b';
+        }
+        let p = parent();
+        console.log(p.next());
+        // {value: 遍历器, done: false}
+        console.log(p.next());
+        console.log(p.next());
+
+        console.log('--------------------');
+
+        function* parent2() {
+            yield 'a';
+            // yield* 返回遍历结果
+            yield* son();
+            yield 'b';
+        }
+        let p2 = parent2();
+        console.log(p2.next());
+        console.log(p2.next());
+        console.log(p2.next());
+        console.log(p2.next());
+        console.log(p2.next());
+
+        // 测试
+        function* gen() {
+            // yield* 遍历可遍历对象
+            yield* 'asdfgh';
+            yield* [1,2,3,4,5];
+        }
+        console.log(...gen());
+    </script>
+</body>
+</html>
