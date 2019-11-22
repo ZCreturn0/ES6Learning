@@ -37,6 +37,22 @@
          * 执行了 next 函数,激活了内部 catch,内部 catch 捕获了 'aaaa' 错误,外部 catch 捕获了 'bbbb' 错误
          * 
          */
+
+         // throw 会触发一次 next
+         function* gen2() {
+             try {
+                 yield console.log('a');
+             }
+             catch(e) {
+                 console.log(e);
+             }
+             yield console.log('b');
+             yield console.log('c');
+         }
+         let g2 = gen2();
+         g2.next();             // a
+         g2.throw('abc');       // 先触发 catch 输出 'abc',然后再触发一次 next,输出 'b'
+         g2.next();             // c
     </script>
 </body>
 </html>
