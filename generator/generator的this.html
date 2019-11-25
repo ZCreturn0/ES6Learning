@@ -9,9 +9,12 @@
 <body>
     <script>
         function* gen() {
-
+            this.a = 1;
+            yield this.b = 2;
+            yield this.c = 3;
         }
         gen.prototype.hello = () => {
+            this.a = 'cccc';
             console.log('aaa');
         }
 
@@ -22,6 +25,24 @@
         // 同时继承了原型
         // aaa
         obj.hello();
+        // 无法继承构造里的属性
+        // undefined
+        console.log(obj.a);
+
+        // gen 不是构造函数,直接 new 会报错
+        // new gen(); TypeError: F is not a constructor
+
+        // 包装成构造函数
+        function F() {
+            return gen.call(gen.prototype);
+        }
+
+        let o = new F();
+        o.next();
+        o.next();
+        console.log(o.a);
+        console.log(o.b);
+        console.log(o.c);
     </script>
 </body>
 </html>
