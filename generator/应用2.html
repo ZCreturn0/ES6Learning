@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1. 异步操作同步化处理
+        // 场景: 数据加载时显示加载中 UI,加载完后移除加载 UI
+        function loadUI() {
+            console.log('loading... show');
+        }
+        // 异步
+        function getData() {
+            setTimeout(() => {
+                console.log('data loaded');
+                // 回调,数据获取完后隐藏 UI
+                loader.next();
+            }, 2000);
+        }
+        function unloadUI() {
+            console.log('loading... remove');
+        }
+        function* loadingData() {
+            loadUI();
+            yield getData();
+            unloadUI();
+        }
+        // 返回状态机
+        let loader = loadingData();
+        // 显示UI, 开始请求数据
+        loader.next();
+
+        // 2. 部署 iterator 接口
+        function* iteratorEntries(obj) {
+            let keys = Object.keys(obj);
+            for(let key of keys) {
+                yield [key, obj[key]];
+            }
+        }
+        let obj = {
+            name: 'aaaa',
+            age: 12
+        };
+        for(let [key, value] of iteratorEntries(obj)) {
+            console.log(`${key}: ${value}`);
+        }
+    </script>
+</body>
+</html>
