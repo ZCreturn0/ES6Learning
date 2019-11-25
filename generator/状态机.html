@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 状态机:用于切换状态
+        let status = true;
+        // 缺点: 会被外部修改状态
+        function toggle() {
+            return status = !status;
+        }
+
+        // generator 实现
+        function* gen() {
+            while(true) {
+                yield false;
+                yield true;
+            }
+        }
+        // 优点: 不用额外变量保存状态   外部无法修改状态
+        let g = gen();
+        console.log(g.next().value);
+        console.log(g.next().value);
+        console.log(g.next().value);
+        console.log(g.next().value);
+        console.log(g.next().value);
+    </script>
+</body>
+</html>
