@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // thunk 函数传名,传递时不计算,只在调用时计算
+        function thunk(m) {
+            return m + 5;
+        }
+        function sum(m, n) {
+            return m + n;
+        }
+        console.log(sum(thunk(5), thunk(10)));
+    </script>
+</body>
+</html>
