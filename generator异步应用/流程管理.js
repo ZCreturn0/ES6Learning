@@ -28,23 +28,42 @@ function* gen() {
     let r2 = yield readFilreThunk(file2Path);
 }
 
-let g = gen();
-let r = g.next();               // r.value 是一个函数,需传入一个回调函数
+// let g = gen();
+// let r = g.next();               // r.value 是一个函数,需传入一个回调函数
 
-r.value((err, data) => {
-    if(err) {
-        console.log('error:' + err);
+// r.value((err, data) => {
+//     if(err) {
+//         console.log('error:' + err);
+//     }
+//     else {
+//         console.log(data.toString());
+//         let r2 = g.next();
+//         r2.value((err, res) => {
+//             if (err) {
+//                 console.log('error:' + err);
+//             }
+//             else {
+//                 console.log(res.toString());
+//             }
+//         });
+//     }
+// });
+
+function run(gen) {
+    let g = gen();
+    function next(err, data) {
+        // 第一次 next 传入的 data 没作用
+        let result = g.next(data);
+        if(data) {
+            console.log(data.toString());
+        }
+        if(result.done) {
+            return;
+        }
+        // 回调参数会传入到 next
+        result.value(next);
     }
-    else {
-        console.log(data.toString());
-        let r2 = g.next();
-        r2.value((err, res) => {
-            if (err) {
-                console.log('error:' + err);
-            }
-            else {
-                console.log(res.toString());
-            }
-        });
-    }
-});
+    next();
+}
+
+run(gen);
