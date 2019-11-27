@@ -49,6 +49,8 @@ function* gen() {
 //     }
 // });
 
+
+// 回调处理
 function run(gen) {
     let g = gen();
     function next(err, data) {
