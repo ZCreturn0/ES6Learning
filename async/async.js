@@ -23,21 +23,24 @@ f2().then(res => {
 
 
 // async 函数必须等内部所有 await 函数执行完后返回
-// async function Sleep(fn, ms, ...args) {
-//     await new Promise(() => {
-//         setTimeout(() => {
-//             fn.apply(null, args);
-//         }, ms);
-//     });
-// }
+// await: 返回一个 Promise
+async function Sleep(fn, ms, ...args) {
+    console.log(args);
+    await new Promise((resolve) => {
+        setTimeout(() => {
+            fn.apply(null, args);
+            resolve();
+        }, ms);
+    });
+}
 
-// // Sleep(console.log, 1000, 1, 2, 3);
+// Sleep(console.log, 1000, 1, 2, 3);
 
-// async function run() {
-//     await Sleep(console.log, 1000, 1, 2, 3);
-//     await Sleep(console.log, 1000, 'a', 'b', 'c');
-//     return 'done';
-// }
-// run().then(data => {
-//     console.log(data);
-// });
+async function run() {
+    await Sleep(console.log, 1000, 1, 2, 3);
+    await Sleep(console.log, 1000, 'a', 'b', 'c');
+    return 'done';
+}
+run().then(data => {
+    console.log(data);
+});
