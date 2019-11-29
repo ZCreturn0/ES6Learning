@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Point {
+            #x;
+            #y;
+            constructor(x, y) {
+                this.#x = x;
+                this.#y = y;
+            }
+            // 私有方法暂不支持
+            // #coord() {
+            //     return `${this.#x},${this.#y}`;
+            // }
+            // showPoint() {
+            //     console.log(this.#coord());
+            // }
+        }
+        let p1 = new Point(1, 2);
+        console.log(p1);
+        // 私有属性外部不能访问
+        // console.log(p1.#x);
+        // 私有方法外部不能访问
+        // console.log(p1.#coord());
+        // console.log(p1.showPoint());
+    </script>
+</body>
+</html>
