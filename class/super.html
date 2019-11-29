@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // super 作为对象使用时指向父类原型
+        class Parent {
+            aa;
+            constructor(a) {
+                this.aa = a;
+            }
+            print() {
+                console.log(this.aa);
+            }
+        }
+        class Son extends Parent {
+            constructor(aa) {
+                super(aa);
+                // 作为对象使用时指向父类原型,相当于 Parent.prototype
+                super.print();              // aaaaaa
+                // aa 不在父类原型上,所以无法获取到
+                console.log(super.aa);      // undefined
+            }
+        }
+        new Son('aaaaaa');
+    </script>
+</body>
+</html>
