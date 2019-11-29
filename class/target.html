@@ -20,8 +20,24 @@
         }
         let p = new Point(1, 2);
         console.log(p);
-        // 不是用 new 生成实例, new.target 为 undefined
-        Point(1, 2);
+        // 不是用 new 生成实例, new.target 为 undefined, 返回报错
+        // Point(1, 2);
+
+        // new.target 在 constructor 里指向当前 Class
+        // 子类继承后会指向子类
+        class Shape {
+            constructor() {
+                console.log(new.target === Shape);
+            }
+        }
+        class Circle extends Shape {
+            constructor() {
+                // 此时 new.target 指向 Circle
+                super();
+            }
+        }
+        new Shape();
+        new Circle();
     </script>
 </body>
 </html>
