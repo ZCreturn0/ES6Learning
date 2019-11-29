@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // new.target 指向构造;必须是通过 new 命令或 Reflect.construct() 调用的
+        function Point(x, y) {
+            if(new.target) {
+                this.x = x;
+                this.y = y;
+            }
+            else {
+                throw new Error('必须使用 new 生成实例');
+            }
+        }
+        let p = new Point(1, 2);
+        console.log(p);
+        // 不是用 new 生成实例, new.target 为 undefined
+        Point(1, 2);
+    </script>
+</body>
+</html>
