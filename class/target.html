@@ -38,6 +38,31 @@
         }
         new Shape();
         new Circle();
+
+        // 使用 new.tartget 的特点实现抽象类(只能被继承不能创建实例)
+        class Animal {
+            name;
+            constructor() {
+                if(new.target === Animal) {
+                    throw new Error('Animal 为抽象类,不能创建实例');
+                }
+            }
+        }
+        class Dog extends Animal {
+            constructor(name) {
+                super();
+                if(new.target === Dog) {
+                    this.name = name;
+                }
+                else {
+                    throw new Error('必须使用 new 生成 Dog 实例');
+                }
+            }
+        }
+
+        // 报错
+        // console.log(new Animal());
+        console.log(new Dog('aaaa'));
     </script>
 </body>
 </html>
